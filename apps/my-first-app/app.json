@@ -1,5 +1,9 @@
 {
   "expo": {
+    "extra": {
+      "API_KEY": "mi_clave_de_api_secreta",
+      "API_URL": "https://weatherapi-com.p.rapidapi.com"
+    },
     "name": "my-first-app",
     "slug": "my-first-app",
     "version": "1.0.0",

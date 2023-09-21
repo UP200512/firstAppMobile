@@ -1,8 +1,18 @@
-import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Image,
+  ImageBackground,
+  ActivityIndicator 
+} from "react-native";
 import { getWetherByName } from "./src/services/wether";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Details from "./src/components/Details";
-
+import Header from "./src/components/Header";
+import {stylesSearch} from "./src/styles/styleSearch.js"
 // Componente View -> DIV HTML
 // Componente Text -> p HTML
 
@@ -11,6 +21,11 @@ export default function App() {
   const [wether, setWether] = useState();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if(error) {
+        alert("There isn't any match!");
+    }
+  }, [wether])
 
   const onPressHanddle = async () => {
     if (city) {
@@ -36,39 +51,28 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.mainTitle}>Wether App</Text>
-      <View>
-        <Text>Write a City</Text>
-        <TextInput
-          autoCorrect={true}
-          keyboardType="text"
-          placeholder="City"
-          style={styles.input}
-          value={city}
-          onChangeText={handdleChangeText}
-        />
-        <Button title="Search" onPress={onPressHanddle} />
+    <ImageBackground
+      source={require("./assets/fondo.jpg")}
+      style={stylesSearch.backgroundImage}
+    >
+      <Header />
+      <View style={stylesSearch.container}>
+        <View style={stylesSearch.formulario}>
+          <Text style={stylesSearch.textoBlanco}>Write a City</Text>
+          <TextInput
+            autoCorrect={true}
+            placeholder={"City"}
+            style={stylesSearch.input}
+            value={city}
+            onChangeText={handdleChangeText}
+          />
+          <Button title="Search" onPress={onPressHanddle} style={stylesSearch.botoncito} />
+        </View>
+        {loading && <ActivityIndicator size={70} color="white" />}
+        {!error && !loading && wether && <Details wether={wether} />}
       </View>
-      {loading && <Text>Loading!!!!!!</Text>}
-      {!error && !loading && wether && <Details wether={wether} />}
-    </View>
+    </ImageBackground>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mainTitle: {
-    fontSize: 30, // <- Los pixeles son dependiendo del dispositivo
-    color: "#8CC7FF",
-  },
-  input: {
-    width: 250,
-    marginVertical: 10,
-  },
-});
+

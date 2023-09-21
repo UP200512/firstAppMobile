@@ -1,12 +1,13 @@
 import currentWether from '../api/source/data.json';
 import errorWether from '../api/source/error.json';
+import config from '../../config.js';
 
-const url = 'https://weatherapi-com.p.rapidapi.com';
+const url = config.BASE_URL;
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': 'bf9f57d213msh779f78b866de13bp1e864djsn642281fee0a3',
-        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        'X-RapidAPI-Key': config.API_KEY,
+        'X-RapidAPI-Host': config.API_HOST
     }
 };
 
