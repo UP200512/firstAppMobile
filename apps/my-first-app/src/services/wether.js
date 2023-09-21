@@ -1,7 +1,9 @@
+import Config from 'react-native-config';
 import currentWether from '../api/source/data.json';
 import errorWether from '../api/source/error.json';
 
-const url = 'https://weatherapi-com.p.rapidapi.com';
+// const url = 'https://weatherapi-com.p.rapidapi.com';
+const url=Config.API_URL
 const options = {
     method: 'GET',
     headers: {
@@ -15,6 +17,7 @@ export async function getWether() {
 }
 
 export async function getWetherByName(cityName) {
+    console.log("url: ",url)
     const BASE_URL = new URL('/current.json', url);
     BASE_URL.searchParams.append('q', cityName)
     console.log(BASE_URL.href)
