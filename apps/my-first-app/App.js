@@ -51,13 +51,7 @@ export default function App() {
         <Button title="Search" onPress={onPressHanddle} />
       </View>
       {loading && <Text>Loading!!!!!!</Text>}
-      {!error && !loading && wether && (
-        
-          
-          <Details wether={wether}/>
-        
-        
-      )}
+      {!error && !loading && wether && <Details wether={wether} />}
     </View>
   );
 }
